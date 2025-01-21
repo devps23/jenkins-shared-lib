@@ -16,12 +16,12 @@ def call() {
     }
     if (env.BRANCH_NAME == 'main') {
         stage('Build Code') {
-            sh 'docker build -t 041445559784.dkr.ecr.us-east-1.amazonaws.com/expense-backend:v1 .'
+        sh 'docker build -t 041445559784.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${BRANCH_NAME} .'
             print 'OK'
         }
         stage('Release Software') {
-            sh 'docker login aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 041445559784.dkr.ecr.us-east-1.amazonaws.com'
-            sh 'docker push 041445559784.dkr.ecr.us-east-1.amazonaws.com/expense-backend:v1'
+        sh 'docker login aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 041445559784.dkr.ecr.us-east-1.amazonaws.com'
+        sh 'docker push 041445559784.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${BRANCH_NAME}'
             print 'OK'
         }
     } else {
