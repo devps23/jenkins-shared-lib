@@ -14,7 +14,7 @@ def call() {
             )
         }
     }
-    if (env.TAG_NAME ==~ '.*') {
+    if (env.BRANCH_NAME == 'main') {
         stage('Build Code') {
             sh 'docker build -t 041445559784.dkr.ecr.us-east-1.amazonaws.com/expense-backend:v1 .'
             print 'OK'
