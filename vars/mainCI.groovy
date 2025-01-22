@@ -16,9 +16,7 @@ def call() {
     }
     if (env.TAG_NAME ==~ '.*') {
         stage('Build Code') {
-            steps{
-                sh 'env'
-            }
+            sh 'env'
             print 'OK'
         }
         stage('Release Software') {
