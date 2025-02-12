@@ -32,5 +32,19 @@ https://github.com/devps23/expense-backend
 * now search config.xml file in /var/lib/jenkins
 * cd /var/lib/jenkins --> jobs ---> test ---> config.xml
 * copy this config.xml file and paste
+
+WebHook:
+========
+* click on multibranch pipeline either frontend/backend , goto configure ----> Scan Multibranch Pipeline Triggerss
+* instead of "build now " action for every node automatically executes based on webhooks
+* install a plugin "Multibranch Scan Webhook Trigger"
+* goto configure ----> Scan Multibranch Pipeline Triggers
+* click "Scan by webhook"
+* Trigger Token : expense-frontend
+* click on ?(Question mark) ; trigger token
+* copy that token like jenkins_url....?token=expense-backend
+* paste this trigger token into a webhook in github
+  copy the config.xml file and paste under templates
+  for tags need to click "build now " where as for branch automatically build now action will happened
 * node server
 ==============
