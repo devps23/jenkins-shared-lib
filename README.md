@@ -48,3 +48,5 @@ WebHook:
   for tags need to click "build now " where as for branch automatically build now action will happened
 * node server
 ==============
+* in node server install java17 version 
+* for example if a server is a 'ci-server' then should install java17 version, then only agent will connect to jenkins server.
