@@ -50,3 +50,16 @@ WebHook:
 ==============
 * in node server install java17 version 
 * for example if a server is a 'ci-server' then should install java17 version, then only agent will connect to jenkins server.
+
+
+aws-auth:
+=========
+* install aws-auth in workstation
+* aws-auth is used to provide authentication from eks cluster to required node agent.
+* 
+sh 'argocd app set ${component} --parameter appVersion=${TAG_NAME}'
+the above cmd is used to set parameter based on tagname, but this parameter updates on only argocd dashboard
+sh 'argocd app sync ${component}'
+once when we sync then only tagname version changed inside a container.
+
+$ aws-auth upsert --maproles --rolearn arn:aws:iam::041445559784:instance-profile/workstattion_role --username system:node:{{EC2PrivateDNSName}} --groups system:bootstrappers system:nodes
