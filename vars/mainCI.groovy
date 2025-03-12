@@ -27,7 +27,7 @@ def call() {
             }
             stage('Deploy to Dev'){
                 sh 'aws eks update-kubeconfig --name dev-eks'
-                sh ' argocd login a1ef8d33ae9b344ce9021617663a8f2d-1765897891.us-east-1.elb.amazonaws.com --username admin --password VYgbiuqKkrteqWHj --insecure --grpc-web'
+                sh ' argocd login $(kubectl get svc -n argocd argocd-server | awk \'{print$4}\' | tail -1) --username admin --password $(argocd admin initial-password -n argocd | head -1) --insecure --grpc-web'
                 sh 'argocd app create ${component} --repo https://github.com/devps23/eks-helm-argocd.git --path chart --upsert --dest-server https://kubernetes.default.svc --dest-namespace default.svc --insecure  --grpc-web --values values/${component}.yaml'
                 sh 'argocd app set ${component} --parameter appVersion=${TAG_NAME}'
                 sh 'argocd app sync ${component}'
